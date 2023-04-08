@@ -1,44 +1,14 @@
 <?php
-error_reporting(E_ALL);
-
-include '../database/config.php';
-
 session_start();
 
+require "../scripts/getUser.php";
+
 // prevent user from pressing back button after having logged in. Which would send them again to login page.
-if (isset($_SESSION['client_name'])) {
+if (isset($_SESSION['user_id'])) {
     header('location:../index.php');
-    exit;
-} else if (isset($_SESSION['admin_name'])) {
-    header('location:admin_panel.php?pag=1');
-    exit;
+    die();
 }
 
-if (isset($_POST['email']) && isset($_POST['password'])) {
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $password = mysqli_real_escape_string($connection, $_POST['password']);
-
-    $sql_query = " SELECT * FROM user WHERE email = '$email' ";
-    $query_result = mysqli_query($connection, $sql_query);
-
-    if (mysqli_num_rows($query_result) > 0) {
-        $row = mysqli_fetch_array($query_result);
-        $hashPassFromDB = $row['password'];
-        if (password_verify($password, $hashPassFromDB)) {
-            if ($row['role'] == 'client') {
-                $_SESSION['client_name'] = $row['name'];
-                header('location:../index.php');
-            } else {
-                $_SESSION['admin_name'] = $row['name'];
-                header('location:admin_panel.php?pag=1');
-            }
-        } else {
-            $error = 'Incorrect email or password.';
-        }
-    } else {
-        $error = 'Incorrect email or password.';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +36,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../css/style.css" rel="stylesheet">
+
+    <script src="../js/signin.js" defer></script>
+
 </head>
 
 <body>
@@ -84,21 +57,31 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h3>Sign In</h3>
                         </div>
+
+                        <div>
+                            <h5 id="invisible-error" style="color: red;"></h5>
+                        </div>
+
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email">
                             <label for="floatingInput">Email address</label>
                         </div>
+
                         <div class="form-floating mb-4">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
+
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <a href="">Forgot Password?</a>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+
+                        <button type="submit" id="button" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+
                         <p class="text-center mb-0">Don't have an Account? <a href="signup.php">Sign Up</a></p>
                     </div>
                 </div>

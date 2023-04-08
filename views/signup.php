@@ -3,7 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include '../database/config.php';
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('location:../index.php');
+    die();
+}
 
 ?>
 
