@@ -4,7 +4,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include '../database/config.php';
-require '../scripts/signupScript.php';
 
 ?>
 
@@ -57,7 +56,10 @@ require '../scripts/signupScript.php';
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h3>Sign Up</h3>
-                            <h5 id="invisible-error"></h5>
+                        </div>
+
+                        <div>
+                            <h5 id="invisible-error" style="color: red;"></h5>
                         </div>
 
                         <div class="form-floating mb-3">

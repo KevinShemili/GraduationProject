@@ -4,9 +4,7 @@ let passField = document.getElementById("floatingPassword");
 let submitButton = document.getElementById("button");
 let error = document.getElementById("invisible-error");
 
-const PASSWORD_REGEX = new RegExp(
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
-);
+const PASSWORD_REGEX = new RegExp("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$");
 
 let clearFields = () => {
   usernameField.value = "";
@@ -26,25 +24,32 @@ submitButton.addEventListener("click", (ev) => {
   if (username == "" || email == "" || password == "") {
     ev.stopPropagation();
     ev.preventDefault();
-  } else {
-    let http = new XMLHttpRequest();
-    http.open("POST", "../scripts/signupScript.php", true);
-    http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    http.onreadystatechange = function () {
-      if (http.readyState == 4 && http.status == 200) {
-        let response = JSON.parse(http.responseText);
-        if (response.errors) {
-          error.innerText = response.errors;
-          error.style.color = "red";
-        } else {
-          // show modal...
-        }
-      }
-    };
-
-    http.send(
-      "username=" + username + "&email=" + email + "&password=" + password
-    );
+    error.innerText = "Fill in all fields.";
+    return;
   }
+
+  if (!PASSWORD_REGEX.test(password)) {
+    error.innerText =
+      "Invalid password format.\nAt least 8 characters and 1 number.";
+    return;
+  }
+
+  let http = new XMLHttpRequest();
+  http.open("POST", "../scripts/signupScript.php", true);
+  http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  http.onreadystatechange = function () {
+    if (http.readyState == 4 && http.status == 200) {
+      let response = JSON.parse(http.responseText);
+      if (response) {
+        error.innerText = response;
+      } else {
+        // show modal...
+      }
+    }
+  };
+
+  http.send(
+    "username=" + username + "&email=" + email + "&password=" + password
+  );
 });
