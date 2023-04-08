@@ -1,16 +1,15 @@
-let nameField = document.getElementById("nameField");
-let surnameField = document.getElementById("surnameField");
-let emailField = document.getElementById("emailField");
-let passField = document.getElementById("passField");
+let usernameField = document.getElementById("floatingText");
+let emailField = document.getElementById("floatingInput");
+let passField = document.getElementById("floatingPassword");
 let submitButton = document.getElementById("button");
+let error = document.getElementById("invisible-error");
 
 const PASSWORD_REGEX = new RegExp(
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 );
 
 let clearFields = () => {
-  nameField.value = "";
-  surnameField.value = "";
+  usernameField.value = "";
   emailField.value = "";
   passField.value = "";
 };
@@ -20,27 +19,32 @@ window.addEventListener("pageshow", () => {
 });
 
 submitButton.addEventListener("click", (ev) => {
-  let name = nameField.value;
-  let surname = surnameField.value;
+  let username = usernameField.value;
   let email = emailField.value;
   let password = passField.value;
 
-  if (name == "" || surname == "" || email == "" || password == "") {
+  if (username == "" || email == "" || password == "") {
     ev.stopPropagation();
     ev.preventDefault();
   } else {
     let http = new XMLHttpRequest();
-    http.open("POST", "../views/register_form.php", true);
+    http.open("POST", "../scripts/signupScript.php", true);
     http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        let response = JSON.parse(http.responseText);
+        if (response.errors) {
+          error.innerText = response.errors;
+          error.style.color = "red";
+        } else {
+          // show modal...
+        }
+      }
+    };
+
     http.send(
-      "name=" +
-        name +
-        "&surname=" +
-        surname +
-        "&email=" +
-        email +
-        "&password=" +
-        password
+      "username=" + username + "&email=" + email + "&password=" + password
     );
   }
 });

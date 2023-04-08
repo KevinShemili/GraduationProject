@@ -1,38 +1,11 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include '../database/config.php';
+require '../scripts/signupScript.php';
 
-echo '<body style="background-color:#eee">';
-define('PASSWORD_REGEX', '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/');
-
-if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) && isset($_POST['password'])) {
-    $name = mysqli_real_escape_string($connection, $_POST['name']);
-    $surname = mysqli_real_escape_string($connection, $_POST['surname']);
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $password = mysqli_real_escape_string($connection, $_POST['password']);
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if (preg_match(PASSWORD_REGEX, $password)) {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            $sql_query = " SELECT * FROM user WHERE email = '$email' ";
-            $query_result = mysqli_query($connection, $sql_query);
-
-            if (mysqli_num_rows($query_result) > 0) {
-                $error = 'Email already exists! <a href="login_form.php" id="error-a">Log In</a>';
-            } else {
-                $sql_insert_query = " INSERT INTO user(name, surname, email, password, role) VALUES ('$name', '$surname','$email', '$hashed_password', 'client')";
-                mysqli_query($connection, $sql_insert_query);
-                header('location:login_form.php');
-            }
-        } else {
-            $error = "Password must be a minimum of 8 characters, of which 1 is uppercase, 1 is a number and 1 is lowercase.";
-        }
-    } else {
-        $error = "Please put a valid email.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,10 +33,13 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../css/style.css" rel="stylesheet">
+
+    <script src="../js/signup.js" defer></script>
 </head>
 
 <body>
     <div class="container-fluid position-relative d-flex p-0">
+
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -81,24 +57,25 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h3>Sign Up</h3>
+                            <h5 id="invisible-error"></h5>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingText" placeholder="Username" autocomplete="off">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Username" name="username" autocomplete="off">
                             <label for="floatingText">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="Email" autocomplete="off">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" autocomplete="off">
                             <label for="floatingInput">Email address</label>
                         </div>
 
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="off">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" autocomplete="off">
                             <label for="floatingPassword">Password</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+                        <button type="submit" id="button" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
                         <p class="text-center mb-0">Already have an Account? <a href="signin.php">Sign In</a></p>
                     </div>
                 </div>
@@ -120,6 +97,7 @@ if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) 
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
+
 </body>
 
 </html>
