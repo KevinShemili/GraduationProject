@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 require "../database/config.php";
 require "../vendor/autoload.php";
+require "../Credentials/smtp_config.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -35,20 +36,19 @@ if (
                 $errors[] = "Could not create signup.";
             }
 
-            /*
             // Sent email for new registration
             $mail = new PHPMailer(true);
             $mail->isSMTP();
             $mail->Host = "smtp.gmail.com";
             $mail->SMTPAuth = true;
 
-            $mail->Username = "sentimentanalysisproject23@gmail.com";
-            $mail->Password = "mkchnbikslkyywnr";
+            $mail->Username = $SMTP_USERNAME;
+            $mail->Password = $SMTP_PASSWORD;
 
             $mail->SMTPSecure = "ssl";
             $mail->Port = 465;
 
-            $mail->setFrom("sentimentanalysisproject23@gmail.com");
+            $mail->setFrom($SMTP_USERNAME);
             $mail->addAddress($email);
 
             $mail->isHTML(true);
@@ -60,7 +60,6 @@ if (
             } catch (Exception $e) {
                 $errors[] = $e;
             }
-            */
         }
     } else {
         $errors[] = "Please put a valid email. (example@mail.com)";

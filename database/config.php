@@ -1,5 +1,7 @@
 <?php
 
+// database
+
 $connection = mysqli_connect('localhost', 'root', '', 'sentiment_analysis');
 
 if (!$connection) {
