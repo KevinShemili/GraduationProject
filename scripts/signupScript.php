@@ -86,29 +86,30 @@ if ($mysqliResult == false) {
     die();
 }
 
-    /*
-            // Sent email for new registration
-            $mail = new PHPMailer(true);
-            $mail->isSMTP();
-            $mail->Host = "smtp.gmail.com";
-            $mail->SMTPAuth = true;
+echo getJson("200");
 
-            $mail->Username = $SMTP_USERNAME;
-            $mail->Password = $SMTP_PASSWORD;
+/* TO UNCOMMENT
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = "smtp.gmail.com";
+$mail->SMTPAuth = true;
 
-            $mail->SMTPSecure = "ssl";
-            $mail->Port = 465;
+$mail->Username = $SMTP_USERNAME;
+$mail->Password = $SMTP_PASSWORD;
 
-            $mail->setFrom($SMTP_USERNAME, "Twitter Sentiment Analysis");
-            $mail->addAddress($email);
+$mail->SMTPSecure = "ssl";
+$mail->Port = 465;
 
-            $mail->isHTML(true);
-            $mail->Subject = "Successful Registration.";
-            $mail->Body = "Successful Registration for twitter sentiment analysis.";
+$mail->setFrom($SMTP_USERNAME, "Twitter Sentiment Analysis");
+$mail->addAddress($email);
 
-            try {
-                $mail->send();
-            } catch (Exception $e) {
-                $errors[] = $e;
-            }
-            */
+$mail->isHTML(true);
+$mail->Subject = "Successful Registration.";
+$mail->Body = "Successful Registration for twitter sentiment analysis.";
+
+try {
+    $mail->send();
+} catch (Exception $e) {
+    $errors[] = $e;
+}
+*/

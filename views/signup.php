@@ -47,6 +47,24 @@ include '../database/config.php';
         </div>
         <!-- Spinner End -->
 
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Successful Signup.</h5>
+                    </div>
+                    <div class="modal-body">
+                        Redirecting to login...
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border mx-auto" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Sign Up Start -->
         <div class="container-fluid">
