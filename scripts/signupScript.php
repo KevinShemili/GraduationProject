@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require "../database/config.php";
 require "../vendor/autoload.php";
-require "../Credentials/smtp_config.php";
+require "../keys/smtp_config.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 
