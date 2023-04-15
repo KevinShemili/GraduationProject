@@ -59,7 +59,7 @@ if (isset($_SESSION["user_id"])) {
                     <?php
                     if (isset($_SESSION["user_id"])) {
                         echo '<div class="position-relative">
-                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <img class="rounded-circle" src="img/default.png" alt="" style="width: 40px; height: 40px;">
                             </div>
                             <div class="ms-3">
                                 <h6 class="mb-0">' . $user["username"] . '</h6>
@@ -109,20 +109,22 @@ if (isset($_SESSION["user_id"])) {
                     <?php
                     if (isset($_SESSION["user_id"])) {
                         $username = $_SESSION["user_name"];
+                        $user_id = $_SESSION["user_id"];
                         echo '<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">' . $username . '</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="scripts/logout.php" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>';
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <img class="rounded-circle me-lg-2" src="img/default.png" alt="" style="width: 40px; height: 40px;">
+                                    <span class="d-none d-lg-inline-flex">' . $username . '</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                    <a href="views/profile.php?id=' . $user_id . '" class="dropdown-item">My Profile</a>
+                                    <a href="scripts/logout.php" class="dropdown-item">Log Out</a>
+                                </div>
+                            </div>';
                     } else {
                         echo '<div style="margin-top: 20px; margin-bottom: 20px; color: #191C24; user-select: none; ">drop</div>';
                     }
                     ?>
+
                 </div>
             </nav>
             <!-- Navbar End -->

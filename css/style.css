@@ -228,6 +228,10 @@
     }
 }
 
+.form-control:disabled {
+    background-color: #0e0e0e;
+    border: none;
+}
 
 /*** Date Picker ***/
 .bootstrap-datetimepicker-widget.bottom {
