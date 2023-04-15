@@ -1,9 +1,14 @@
+let basicTab = document.getElementById("pills-basic-tab");
+let photoTab = document.getElementById("pills-photo-tab");
+let keysTab = document.getElementById("pills-keys-tab");
+
 let username = document.getElementById("exampleInputUsername");
 let email = document.getElementById("exampleInputEmail1");
 let password = document.getElementById("exampleInputPassword1");
 let cPassword = document.getElementById("exampleInputPassword2");
 
-let checkBox = document.getElementById("checkbox");
+let checkBox1 = document.getElementById("checkbox1");
+let checkBox2 = document.getElementById("checkbox2");
 
 let consumerKey = document.getElementById("consumerKey");
 let consumerSecret = document.getElementById("consumerSecret");
@@ -14,27 +19,35 @@ let imageForm = document.getElementById("imgForm");
 let imageInput = document.getElementById("imgInput");
 let imgPreview = document.getElementById("imagePreview");
 
-let saveBtn = document.getElementById("saveBtn");
+let saveBtn1 = document.getElementById("saveBtn1");
+let saveBtn2 = document.getElementById("saveBtn2");
+let saveBtn3 = document.getElementById("saveBtn3");
 
 const urlParams = new URLSearchParams(window.location.search);
 
 let numberOnlyRegex = /^[0-9]+$/;
 
-checkBox.addEventListener("change", () => {
-  if (checkBox.checked) {
+checkBox1.addEventListener("change", () => {
+  if (checkBox1.checked) {
+    password.disabled = true;
+    cPassword.disabled = true;
+  } else {
+    password.disabled = false;
+    cPassword.disabled = false;
+  }
+});
+
+checkBox2.addEventListener("change", () => {
+  if (checkBox2.checked) {
     consumerKey.disabled = true;
     consumerSecret.disabled = true;
     accessToken.disabled = true;
     accessTokenSecret.disabled = true;
-    password.disabled = true;
-    cPassword.disabled = true;
   } else {
     consumerKey.disabled = false;
     consumerSecret.disabled = false;
     accessToken.disabled = false;
     accessTokenSecret.disabled = false;
-    password.disabled = false;
-    cPassword.disabled = false;
   }
 });
 
@@ -96,14 +109,17 @@ window.onload = () => {
 };
 
 saveBtn.addEventListener("click", () => {
-  const prdid = urlParams.get("prdid");
+  const id = urlParams.get("id");
   let http = new XMLHttpRequest();
   http.open("POST", "../controller/updateProduct.php");
   let form = new FormData();
+
   if (img.files[0] != null) {
     form.append("photoForm", img.files[0], img.files[0].name);
   }
-  form.append("prdid", prdid);
+
+  form.append("id", id);
+
   if (productName.value != null) {
     form.append("productName", productName.value);
   }

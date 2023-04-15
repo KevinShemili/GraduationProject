@@ -133,71 +133,96 @@ if (isset($_SESSION["user_id"])) {
             <!-- Algorithms Section -->
 
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded-top p-4">
+
+                    <div class="bg-secondary rounded p-10">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Basic Information</h6>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="exampleInputUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername" autocomplete="new-password">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" autocomplete="new-password">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="new-password" disabled>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword2" autocomplete="new-password" disabled>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                            <h6 class="mb-4">Edit your information</h6>
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic" type="button" role="tab" aria-controls="pills-basic" aria-selected="true">Basic</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-photo-tab" data-bs-toggle="pill" data-bs-target="#pills-photo" type="button" role="tab" aria-controls="pills-photo" aria-selected="false">Profile Photo</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-keys-tab" data-bs-toggle="pill" data-bs-target="#pills-keys" type="button" role="tab" aria-controls="pills-keys" aria-selected="false">Keys</button>
+                                </li>
+                            </ul>
 
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Change Photo</h6>
+                            <div class="tab-content" id="pills-tabContent">
 
-                            <form id="imgForm" method="post">
-                                <div class="mb-3 text-center">
-                                    <img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/default.png" alt="" style="width: 150px; height: 150px;">
-                                    <input class="form-control bg-dark mt-3" type="file" id="imgInput" accept="image/jpg, image/jpeg, image/png">
+                                <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+                                    <h6 class="mb-4 mt-4">Credentials</h6>
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="exampleInputUsername" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="exampleInputUsername" autocomplete="new-password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" autocomplete="new-password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="new-password" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword2" autocomplete="new-password" disabled>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" id="checkbox1" checked>
+                                        <label class="form-check-label" for="gridCheck1">
+                                            Read Only
+                                        </label><br>
+                                        <button id="saveBtn1" type="button" class="btn btn-success mt-5">Save</button>
+                                    </form>
                                 </div>
-                            </form>
 
-                        </div>
-                    </div>
+                                <div class="tab-pane fade" id="pills-photo" role="tabpanel" aria-labelledby="pills-photo-tab">
+                                    <div class="bg-secondary rounded h-100 p-4">
+                                        <h6 class="mb-4">Change Photo</h6>
 
-                    <div class="bg-secondary text-center rounded p-4">
-                        <h6 class="mb-4">Twitter Secret Keys</h6>
-                        <div class="d-flex justify-content-center">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="consumerKey" class="form-label">Consumer Key</label>
-                                    <input type="text" class="form-control" id="consumerKey" style="max-width: 500px; min-width: 450px; text-align: center;" disabled>
+                                        <form id="imgForm" method="post">
+                                            <div class="mb-3 text-center">
+                                                <img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/default.png" alt="" style="width: 150px; height: 150px;">
+                                                <input class="form-control bg-dark mt-3" type="file" id="imgInput" accept="image/jpg, image/jpeg, image/png">
+                                            </div>
+                                            <button id="saveBtn2" type="button" class="btn btn-success mt-5">Save</button>
+                                        </form>
+
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="consumerSecret" class="form-label">Consumer Secret</label>
-                                    <input type="text" class="form-control" id="consumerSecret" style="max-width: 500px; min-width: 450px; text-align: center;" disabled>
+
+                                <div class="tab-pane fade" id="pills-keys" role="tabpanel" aria-labelledby="pills-keys-tab">
+
+                                    <h6 class="mb-4 mt-4">Twitter Secret Keys</h6>
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="consumerKey" class="form-label">Consumer Key</label>
+                                            <input type="text" class="form-control" id="consumerKey" autocomplete="new-password" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="consumerSecret" class="form-label">Consumer Secret</label>
+                                            <input type="text" class="form-control" id="consumerSecret" autocomplete="new-password" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="accessToken" class="form-label">Access Token</label>
+                                            <input type="text" class="form-control" id="accessToken" autocomplete="new-password" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="accessTokenSecret" class="form-label">Access Token Secret</label>
+                                            <input type="text" class="form-control" id="accessTokenSecret" autocomplete="new-password" disabled>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox" id="checkbox2" checked>
+                                        <label class="form-check-label" for="gridCheck1">
+                                            Read Only
+                                        </label><br>
+                                        <button id="saveBtn3" type="button" class="btn btn-success mt-5">Save</button>
+                                    </form>
+
                                 </div>
-                                <div class="mb-3">
-                                    <label for="accessToken" class="form-label">Access Token</label>
-                                    <input type="text" class="form-control" id="accessToken" style="max-width: 500px; min-width: 450px; text-align: center;" disabled>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="accessTokenSecret" class="form-label">Access Token Secret</label>
-                                    <input type="text" class="form-control" id="accessTokenSecret" style="max-width: 500px; min-width: 450px; text-align: center;" disabled>
-                                </div>
-                                <input class="form-check-input" type="checkbox" id="checkbox" checked>
-                                <label class="form-check-label" for="gridCheck1">
-                                    Read Only
-                                </label><br>
-                                <button id="saveBtn" type="button" class="btn btn-success mt-5">Save</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
 
