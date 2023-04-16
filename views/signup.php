@@ -52,6 +52,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <!-- Spinner End -->
 
+        <!-- Modal Start -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -69,7 +70,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
-
+        <!-- Modal End -->
 
         <!-- Sign Up Start -->
         <div class="container-fluid">

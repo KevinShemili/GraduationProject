@@ -50,6 +50,7 @@ if (isset($_SESSION["user_id"])) {
         </div>
         <!-- Spinner -->
 
+        <!-- Modal Start -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -67,7 +68,7 @@ if (isset($_SESSION["user_id"])) {
                 </div>
             </div>
         </div>
-
+        <!-- Modal End -->
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -148,8 +149,7 @@ if (isset($_SESSION["user_id"])) {
             <!-- Navbar End -->
 
 
-            <!-- Algorithms Section -->
-
+            <!-- Edit Profile Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary rounded-top p-4">
 
@@ -255,9 +255,7 @@ if (isset($_SESSION["user_id"])) {
 
                 </div>
             </div>
-
-
-            <!-- Algorithms End -->
+            <!-- Edit Profile End -->
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">

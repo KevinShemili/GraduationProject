@@ -1,13 +1,11 @@
 <?php
 session_start();
-require "../database/config.php";
-require "../scripts/getUser.php";
+require "database/config.php";
+require "scripts/getUser.php";
 
 if (isset($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"];
     $user = getUserById_SelectAll($userId, $connection);
-} else {
-    header('location:../index.php');
 }
 
 ?>
@@ -22,27 +20,21 @@ if (isset($_SESSION["user_id"])) {
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="../img/logo.png" rel="icon">
+    <link href="img/logo.png" rel="icon">
 
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,14 +51,14 @@ if (isset($_SESSION["user_id"])) {
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a href="../index.php" class="navbar-brand mx-4 mb-3">
+                <a href="index.php" class="navbar-brand mx-4 mb-3">
                     <h4 class="text-primary">Sentiment Analysis</h4>
                 </a>
                 <div class=" d-flex align-items-center ms-4 mb-4">
                     <?php
                     if (isset($_SESSION["user_id"])) {
                         echo '<div class="position-relative">
-                                <img class="rounded-circle" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
+                                <img class="rounded-circle" src="img/default.png" alt="" style="width: 40px; height: 40px;">
                             </div>
                             <div class="ms-3">
                                 <h6 class="mb-0">' . $user["username"] . '</h6>
@@ -75,7 +67,7 @@ if (isset($_SESSION["user_id"])) {
                     ?>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="../index.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="index.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-laptop me-2"></i>Algorithms
@@ -91,7 +83,7 @@ if (isset($_SESSION["user_id"])) {
 
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        echo '<a href="#" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Analyse</a>';
+                        echo '<a href="views/analyse.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Analyse</a>';
                     } else {
                         echo '<a href="views/signin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign In</a>
                         <a href="views/signup.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign Up</a>';
@@ -119,59 +111,38 @@ if (isset($_SESSION["user_id"])) {
                         $user_id = $_SESSION["user_id"];
                         echo '<div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                    <img class="rounded-circle me-lg-2" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle me-lg-2" src="img/default.png" alt="" style="width: 40px; height: 40px;">
                                     <span class="d-none d-lg-inline-flex">' . $username . '</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                                    <a href="profile.php?id=' . $user_id . '" class="dropdown-item">My Profile</a>
-                                    <a href="../scripts/logout.php" class="dropdown-item">Log Out</a>
+                                    <a href="views/profile.php?id=' . $user_id . '" class="dropdown-item">My Profile</a>
+                                    <a href="scripts/logout.php" class="dropdown-item">Log Out</a>
                                 </div>
                             </div>';
                     } else {
                         echo '<div style="margin-top: 20px; margin-bottom: 20px; color: #191C24; user-select: none; ">drop</div>';
                     }
                     ?>
+
                 </div>
             </nav>
             <!-- Navbar End -->
 
-            <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Analyses</h6>
-                        <a href="newanalysis.php">
-                            <button type="button" class="btn btn-outline-success m-2">
-                                Create new
-                            </button>
-                        </a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-white text-center">
-                                    <th scope="col">Query</th>
-                                    <th scope="col">Number of Tweets</th>
-                                    <th scope="col">Date Created</th>
-                                    <th scope="col">Action</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>query</td>
-                                    <td>200</td>
-                                    <td>22/2020</td>
-                                    <td><a class="btn btn-sm btn-info" href="../chart.html">Details</a>
-                                        <a class="btn btn-sm btn-primary" href="">Delete</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- 404 Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                    <div class="col-md-6 text-center p-4">
+                        <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                        <h1 class="display-1 fw-bold">404</h1>
+                        <h1 class="mb-4">Page Not Found</h1>
+                        <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website!
+                            Maybe go to our home page?</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5" href="index.php">Return to dashboard</a>
                     </div>
                 </div>
             </div>
-            <!-- Table End -->
+            <!-- 404 End -->
 
 
             <!-- Footer Start -->
@@ -179,7 +150,7 @@ if (isset($_SESSION["user_id"])) {
                 <div class="bg-secondary rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="../index.php">Twitter Sentiment Analysis</a>, Graduation Project.
+                            &copy; <a href="index.php">Twitter Sentiment Analysis</a>, Graduation Project.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
                             <a href="">Kevin Shemili</a>
@@ -199,16 +170,16 @@ if (isset($_SESSION["user_id"])) {
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../lib/chart/chart.min.js"></script>
-    <script src="../lib/easing/easing.min.js"></script>
-    <script src="../lib/waypoints/waypoints.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../lib/tempusdominus/js/moment.min.js"></script>
-    <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
