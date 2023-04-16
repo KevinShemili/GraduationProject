@@ -162,7 +162,7 @@ if (isset($_SESSION["user_id"])) {
                                     <td>query</td>
                                     <td>200</td>
                                     <td>22/2020</td>
-                                    <td><a class="btn btn-sm btn-info">Details</a>
+                                    <td><a class="btn btn-sm btn-info" href="../chart.html">Details</a>
                                         <a class="btn btn-sm btn-primary" href="">Delete</a>
                                     </td>
                                 </tr>

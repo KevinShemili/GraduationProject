@@ -50,6 +50,24 @@ if (isset($_SESSION["user_id"])) {
         </div>
         <!-- Spinner -->
 
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Success.</h5>
+                    </div>
+                    <div class="modal-body" id="modaltext">
+                        Saving Changes...
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border mx-auto" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -154,6 +172,9 @@ if (isset($_SESSION["user_id"])) {
 
                                 <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
                                     <h6 class="mb-4 mt-4">Credentials</h6>
+                                    <div>
+                                        <h5 id="invisible-error1" style="color: red;"></h5>
+                                    </div>
                                     <form>
                                         <div class="mb-3">
                                             <label for="exampleInputUsername" class="form-label">Username</label>
@@ -182,7 +203,9 @@ if (isset($_SESSION["user_id"])) {
                                 <div class="tab-pane fade" id="pills-photo" role="tabpanel" aria-labelledby="pills-photo-tab">
                                     <div class="bg-secondary rounded h-100 p-4">
                                         <h6 class="mb-4">Change Photo</h6>
-
+                                        <div>
+                                            <h5 id="invisible-error2" style="color: red;"></h5>
+                                        </div>
                                         <form id="imgForm" method="post">
                                             <div class="mb-3 text-center">
                                                 <img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/default.png" alt="" style="width: 150px; height: 150px;">
@@ -197,6 +220,9 @@ if (isset($_SESSION["user_id"])) {
                                 <div class="tab-pane fade" id="pills-keys" role="tabpanel" aria-labelledby="pills-keys-tab">
 
                                     <h6 class="mb-4 mt-4">Twitter Secret Keys</h6>
+                                    <div>
+                                        <h5 id="invisible-error3" style="color: red;"></h5>
+                                    </div>
                                     <form>
                                         <div class="mb-3">
                                             <label for="consumerKey" class="form-label">Consumer Key</label>
