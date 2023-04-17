@@ -107,7 +107,7 @@ if (isset($_SESSION["user_id"])) {
 
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        $username = $_SESSION["user_name"];
+                        $username = $user["username"];
                         $user_id = $_SESSION["user_id"];
                         echo '<div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

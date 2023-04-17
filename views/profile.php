@@ -157,10 +157,9 @@ if (isset($_SESSION["user_id"])) {
                 </a>
 
                 <div class="navbar-nav align-items-center ms-auto">
-
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        $username = $_SESSION["user_name"];
+                        $username = $user["username"];
                         if ($user["profilePhoto"] == "") {
                             echo '<div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

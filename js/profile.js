@@ -344,49 +344,55 @@ modalDeleteButton.addEventListener("click", () => {
 });
 
 saveBtn3.addEventListener("click", () => {
-  const id = urlParams.get("id");
-  let http = new XMLHttpRequest();
-  http.open("POST", "../controller/updateProduct.php");
-  let form = new FormData();
+  if (!checkBox2.checked) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../scripts/updateKeys.php", true);
 
-  if (img.files[0] != null) {
-    form.append("photoForm", img.files[0], img.files[0].name);
-  }
+    var form = new FormData();
+    const id = urlParams.get("id");
+    form.append("id", id);
 
-  form.append("id", id);
-
-  if (productName.value != null) {
-    form.append("productName", productName.value);
-  }
-  if (productBrand.value != null) {
-    form.append("productBrand", productBrand.value);
-  }
-  if (productPrice.value != null) {
-    form.append("productPrice", productPrice.value);
-  }
-  if (productDesc.value != null) {
-    form.append("productDesc", productDesc.value);
-  }
-  if (checkBox.checked) {
-    form.append("onSale", 1);
-    if (salePercentage.value != null) {
-      form.append("salePercentage", salePercentage.value);
+    if (consumerKey.value == "" || consumerKey.value == null) {
+      error3.innerText = "Fill in all fields.";
+      return;
     }
-  } else {
-    form.append("onSale", 0);
-  }
-  if (productCategory.options[productCategory.selectedIndex].value != null) {
-    form.append(
-      "category",
-      productCategory.options[productCategory.selectedIndex].value
-    );
-  }
-  form.append("qty", parseInt(quantityNr.innerText));
-  http.send(form);
-  http.addEventListener("load", () => {
-    let response = http.responseText;
-    if (response != "error") {
-      window.location.href = "../views/admin_products_panel.php";
+
+    if (consumerSecret.value == "" || consumerSecret.value == null) {
+      error3.innerText = "Fill in all fields.";
+      return;
     }
-  });
+
+    if (accessToken.value == "" || accessToken.value == null) {
+      error3.innerText = "Fill in all fields.";
+      return;
+    }
+
+    if (accessTokenSecret.value == "" || accessTokenSecret.value == null) {
+      error3.innerText = "Fill in all fields.";
+      return;
+    }
+
+    form.append("consumerKey", consumerKey.value);
+    form.append("consumerSecret", consumerSecret.value);
+    form.append("accessToken", accessToken.value);
+    form.append("accessTokenSecret", accessTokenSecret.value);
+
+    xhr.send(form);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        let response = JSON.parse(xhr.responseText);
+        if (response == 200) {
+          $(modal).modal("show");
+          setTimeout(() => {
+            modalBody.innerHTML = "Saved.";
+            $(modal).modal("hide");
+            location.reload();
+          }, 3000);
+        } else {
+          error3.innerText = response;
+        }
+      }
+    };
+  }
 });

@@ -41,7 +41,6 @@ $hashPassFromDB = $row['password'];
 
 if (password_verify($password, $hashPassFromDB)) {
     $_SESSION['user_id'] = $row['id'];
-    $_SESSION['user_name'] = $row['username'];
     echo getJson("200");
     die();
 } else {
