@@ -22,12 +22,15 @@ let imgPreview = document.getElementById("imagePreview");
 let saveBtn1 = document.getElementById("saveBtn1");
 let saveBtn2 = document.getElementById("saveBtn2");
 let saveBtn3 = document.getElementById("saveBtn3");
+let removePhoto = document.getElementById("deletePhotoButton");
 
 let error1 = document.getElementById("invisible-error1");
 let error2 = document.getElementById("invisible-error2");
 let error3 = document.getElementById("invisible-error3");
 
 let modal = document.getElementById("exampleModalCenter");
+let modal2 = document.getElementById("exampleModalCenter2");
+let modalDeleteButton = document.getElementById("modalDelete");
 var modalBody = document.getElementById("modaltext");
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -251,7 +254,7 @@ saveBtn1.addEventListener("click", () => {
             location.reload();
           }, 3000);
         } else {
-          error.innerText = response;
+          error1.innerText = response;
         }
       }
     };
@@ -260,50 +263,84 @@ saveBtn1.addEventListener("click", () => {
 
 saveBtn2.addEventListener("click", () => {
   const id = urlParams.get("id");
-  let http = new XMLHttpRequest();
-  http.open("POST", "../controller/updateProduct.php");
-  let form = new FormData();
 
-  if (img.files[0] != null) {
-    form.append("photoForm", img.files[0], img.files[0].name);
-  }
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "../scripts/updatePhoto.php");
+  let form = new FormData();
 
   form.append("id", id);
 
-  if (productName.value != null) {
-    form.append("productName", productName.value);
-  }
-  if (productBrand.value != null) {
-    form.append("productBrand", productBrand.value);
-  }
-  if (productPrice.value != null) {
-    form.append("productPrice", productPrice.value);
-  }
-  if (productDesc.value != null) {
-    form.append("productDesc", productDesc.value);
-  }
-  if (checkBox.checked) {
-    form.append("onSale", 1);
-    if (salePercentage.value != null) {
-      form.append("salePercentage", salePercentage.value);
-    }
+  if (imgInput.files[0] != null) {
+    form.append("photoForm", imgInput.files[0], imgInput.files[0].name);
   } else {
-    form.append("onSale", 0);
+    error2.innerText = "No photo uploaded.";
+    return;
   }
-  if (productCategory.options[productCategory.selectedIndex].value != null) {
-    form.append(
-      "category",
-      productCategory.options[productCategory.selectedIndex].value
-    );
-  }
-  form.append("qty", parseInt(quantityNr.innerText));
-  http.send(form);
-  http.addEventListener("load", () => {
-    let response = http.responseText;
-    if (response != "error") {
-      window.location.href = "../views/admin_products_panel.php";
+
+  xhr.send(form);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      let response = JSON.parse(xhr.responseText);
+      if (response == 200) {
+        $(modal).modal("show");
+        setTimeout(() => {
+          modalBody.innerHTML = "Saved.";
+          $(modal).modal("hide");
+          location.reload();
+        }, 3000);
+      } else {
+        error2.innerText = response;
+      }
     }
+  };
+});
+
+$(document).ready(function () {
+  $("#modalCancel").click(function () {
+    $("#exampleModalCenter2").modal("hide");
   });
+});
+
+$(document).ready(function () {
+  $("#closeModal").click(function () {
+    $("#exampleModalCenter2").modal("hide");
+  });
+});
+
+removePhoto.addEventListener("click", () => {
+  $(modal2).modal("show");
+});
+
+modalDeleteButton.addEventListener("click", () => {
+  const id = urlParams.get("id");
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "../scripts/deletePhoto.php");
+  let form = new FormData();
+
+  form.append("id", id);
+
+  xhr.send(form);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      let response = JSON.parse(xhr.responseText);
+      if (response == 200) {
+        $("#exampleModalCenter2").modal("hide");
+        $(modal).modal("show");
+        document.getElementById("exampleModalLongTitle").innerText = "";
+        modalBody.innerHTML = "Deleting...";
+        setTimeout(() => {
+          modalBody.innerHTML = "Deleted.";
+          $(modal).modal("hide");
+          location.reload();
+        }, 3000);
+      } else {
+        error2.innerText = response;
+      }
+    }
+  };
 });
 
 saveBtn3.addEventListener("click", () => {

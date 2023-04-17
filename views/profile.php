@@ -50,7 +50,7 @@ if (isset($_SESSION["user_id"])) {
         </div>
         <!-- Spinner -->
 
-        <!-- Modal Start -->
+        <!-- Modal1 Start -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -68,7 +68,29 @@ if (isset($_SESSION["user_id"])) {
                 </div>
             </div>
         </div>
-        <!-- Modal End -->
+        <!-- Modal1 End -->
+
+        <!-- Modal2 Start -->
+        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Remove Photo</h5>
+                        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete your profile photo?
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modalDelete" type="button" class="btn btn-secondary" data-dismiss="modal">Delete</button>
+                        <button id="modalCancel" type="button" class="btn btn-primary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal2 Start -->
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -79,12 +101,21 @@ if (isset($_SESSION["user_id"])) {
                 <div class=" d-flex align-items-center ms-4 mb-4">
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        echo '<div class="position-relative">
-                                <img class="rounded-circle" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
-                            </div>
-                            <div class="ms-3">
-                                <h6 class="mb-0">' . $user["username"] . '</h6>
-                            </div>';
+                        if ($user["profilePhoto"] == "") {
+                            echo '<div class="position-relative">
+                                    <img class="rounded-circle" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">' . $user["username"] . '</h6>
+                                </div>';
+                        } else {
+                            echo '<div class="position-relative">
+                                    <img class="rounded-circle" src="../img/uploads/' . $user["profilePhoto"] . '" alt="" style="width: 40px; height: 40px;">
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">' . $user["username"] . '</h6>
+                                </div>';
+                        }
                     }
                     ?>
                 </div>
@@ -130,16 +161,29 @@ if (isset($_SESSION["user_id"])) {
                     <?php
                     if (isset($_SESSION["user_id"])) {
                         $username = $_SESSION["user_name"];
-                        echo '<div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">' . $username . '</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="../scripts/logout.php" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>';
+                        if ($user["profilePhoto"] == "") {
+                            echo '<div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                            <img class="rounded-circle me-lg-2" src="../img/default.png" alt="" style="width: 40px; height: 40px;">
+                                            <span class="d-none d-lg-inline-flex">' . $username . '</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                            <a href="#" class="dropdown-item">My Profile</a>
+                                            <a href="../scripts/logout.php" class="dropdown-item">Log Out</a>
+                                        </div>
+                                    </div>';
+                        } else {
+                            echo '<div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                            <img class="rounded-circle me-lg-2" src="../img/uploads/' . $user["profilePhoto"] . '" alt="" style="width: 40px; height: 40px;">
+                                            <span class="d-none d-lg-inline-flex">' . $username . '</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                            <a href="#" class="dropdown-item">My Profile</a>
+                                            <a href="../scripts/logout.php" class="dropdown-item">Log Out</a>
+                                        </div>
+                                    </div>';
+                        }
                     } else {
                         echo '<div style="margin-top: 20px; margin-bottom: 20px; color: #191C24; user-select: none; ">drop</div>';
                     }
@@ -208,10 +252,18 @@ if (isset($_SESSION["user_id"])) {
                                         </div>
                                         <form id="imgForm" method="post">
                                             <div class="mb-3 text-center">
-                                                <img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/default.png" alt="" style="width: 150px; height: 150px;">
+                                                <?php
+                                                if ($user["profilePhoto"] == "") {
+                                                    echo '<img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/default.png" alt="" style="width: 150px; height: 150px;">';
+                                                } else {
+                                                    echo '<img class="rounded-circle me-lg-2 mx-auto mb-5" id="imagePreview" src="../img/uploads/' . $user["profilePhoto"] . '" alt="" style="width: 150px; height: 150px;">';
+                                                }
+                                                ?>
+
                                                 <input class="form-control bg-dark mt-3" type="file" id="imgInput" accept="image/jpg, image/jpeg, image/png">
                                             </div>
                                             <button id="saveBtn2" type="button" class="btn btn-success mt-5">Save</button>
+                                            <button id="deletePhotoButton" type="button" class="btn btn-danger mt-5">Remove Photo</button>
                                         </form>
 
                                     </div>
