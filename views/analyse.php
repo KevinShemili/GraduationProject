@@ -161,10 +161,12 @@ if (isset($_SESSION["user_id"])) {
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Analyses</h6>
-                        <a href="newanalysis.php">
-                            <button type="button" class="btn btn-outline-success m-2">
-                                Create new
-                            </button>
+                        <?php
+                        echo '<a href="newanalysis.php?id=' . $user_id . '">';
+                        ?>
+                        <button type="button" class="btn btn-outline-success m-2">
+                            Create new
+                        </button>
                         </a>
                     </div>
                     <div class="table-responsive">
