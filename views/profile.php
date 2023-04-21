@@ -136,7 +136,7 @@ if (isset($_SESSION["user_id"])) {
 
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        echo '<a href="analyse.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Analyse</a>';
+                        echo '<a href="analyse.php?id=' . $userId . '" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Analyse</a>';
                     } else {
                         echo '<a href="signin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign In</a>
                         <a href="signup.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign Up</a>';

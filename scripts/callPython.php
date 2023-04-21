@@ -86,7 +86,8 @@ if ($algorithm == "vader") {
         $neutral = $data["total_neutral"];
         $positive = $data["total_positive"];
         $negative = $data["total_negative"];
-        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `algorithm`, `negative`, `neutral`, `positive`, `user_id`) VALUES ('$query','$tweetNr','$description','$algorithm','$negative','$neutral','$positive','$id') ";
+        $date = date('Y-m-d');
+        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$negative','$neutral','$positive','$id') ";
         $mysqliResult = mysqli_query($connection, $sql_insert_query);
 
         if ($mysqliResult == false) {

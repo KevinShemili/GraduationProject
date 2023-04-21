@@ -43,6 +43,9 @@ if (isset($_SESSION["user_id"])) {
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+
+    <script src="../js/analyse.js" defer></script>
+
 </head>
 
 <body>
@@ -180,15 +183,8 @@ if (isset($_SESSION["user_id"])) {
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>query</td>
-                                    <td>200</td>
-                                    <td>22/2020</td>
-                                    <td><a class="btn btn-sm btn-info" href="../chart.html">Details</a>
-                                        <a class="btn btn-sm btn-primary" href="">Delete</a>
-                                    </td>
-                                </tr>
+                            <tbody id="table-body">
+
                             </tbody>
                         </table>
                     </div>
