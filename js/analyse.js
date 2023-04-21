@@ -46,7 +46,7 @@ let prepareContent = (analyses) => {
             <td>${analyse.nrTweets}</td>
             <td>${analyse.dateCreated}</td>
             <td>
-                <a class="btn btn-sm btn-info" id="details-button" href="chart.php?analyseId=${analyse.id}" self-id="${analyse.id}">Details</a>
+                <a class="btn btn-sm btn-info" id="details-button" href="chart.php?analyseId=${analyse.id}&query=${analyse.query}" self-id="${analyse.id}">Details</a>
                 <a class="btn btn-sm btn-primary" id="delete-button" href="" self-id="${analyse.id}">Delete</a>
             </td>
         </tr>

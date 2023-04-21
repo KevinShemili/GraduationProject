@@ -12,7 +12,7 @@ if (isset($_POST['functionName'])) {
             getAllAnalyses($_POST['id']);
             break;
         case 'getSentiment':
-            updateBasic($_POST['id'], $_POST['username'], $_POST['email']);
+            getSentiment($_POST['analyseId']);
             break;
     }
 }
@@ -58,6 +58,36 @@ function getAllAnalyses($id)
 }
 
 
-function getSentiment($id)
+function getSentiment($analyseId)
 {
+    global $connection;
+
+    $sql_query = " SELECT `negative`, `neutral`, `positive` FROM `analysis` WHERE id = '$analyseId' ";
+    $query_result = mysqli_query($connection, $sql_query);
+
+    if ($query_result == false) {
+        $error = "Query failure.";
+        echo getJson($error);
+        die();
+    }
+
+    if (mysqli_num_rows($query_result) > 0) {
+
+        $row = mysqli_fetch_array($query_result);
+
+        $returnObj = array(
+            "status" => 200,
+            "positive" => $row["positive"],
+            "neutral" => $row["neutral"],
+            "negative" => $row["negative"]
+        );
+
+        echo getJson($returnObj);
+    } else {
+        $returnObj = array(
+            "status" => 500,
+            "error" => "Fatal Error"
+        );
+        echo getJson($returnObj);
+    }
 }
