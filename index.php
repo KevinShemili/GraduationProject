@@ -35,6 +35,7 @@ if (isset($_SESSION["user_id"])) {
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -84,9 +85,9 @@ if (isset($_SESSION["user_id"])) {
                         </a>
 
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">VADER</a>
-                            <a href="typography.html" class="dropdown-item">TEXT BLOB</a>
-                            <a href="element.html" class="dropdown-item">ALGO 3</a>
+                            <a href="views/vader.php" class="dropdown-item">VADER</a>
+                            <a href="views/textblob.php" class="dropdown-item">TextBlob</a>
+                            <a href="views/bert.php" class="dropdown-item">Bert</a>
                         </div>
 
                     </div>
@@ -152,28 +153,101 @@ if (isset($_SESSION["user_id"])) {
 
             <!-- Algorithms Section -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">VADER</h6>
-                        <a href="">Expand</a>
+                <div class="bg-secondary text-center rounded p-4 d-flex align-items-center">
+                    <div class="w-50">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">VADER</h6>
+                            <a href="views/vader.php">Expand</a>
+                        </div>
+                        <div class="w-100">
+                            <h6 class="mb-3">Advantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>Pre-trained on social media data and domain-specific language</p>
+                            <p>Can handle negation, intensifiers, and emoticons well</p>
+                            <p>Computational efficiency and speed</p>
+                            </p>
+                            <h6 class="mt-4 mb-3">Disadvantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>Relies on a fixed set of rules and heuristics</p>
+                            <p>Can have difficulty with sarcasm and irony</li>
+                            <p>May require additional preprocessing for non-English text</p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-50">
+                        <div class="d-flex justify-content-center">
+                            <i class="bi bi-speedometer2" style="font-size: 7rem; color: #00a000;"></i>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h6>Good Speed</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4 d-flex align-items-center">
+                    <div class="w-50">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">BERT</h6>
+                            <a href="views/bert.php">Expand</a>
+                        </div>
+                        <div class="w-100">
+                            <h6 class="mb-3">Advantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>State-of-the-art performance on many NLP tasks</p>
+                            <p>Can handle complex language structure and nuances well</p>
+                            <p>Can be fine-tuned for specific tasks and domains</p>
+                            </p>
+                            <h6 class="mt-4 mb-3">Disadvantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>Large computational requirements and longer processing time</p>
+                            <p>May require extensive domain-specific training data for optimal performance</li>
+                            <p>May be prone to bias and ethical concerns if not properly trained and validated</p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-50">
+                        <div class="d-flex justify-content-center">
+                            <i class="bi bi-speedometer2" style="font-size: 7rem; color: #f73000;"></i>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h6>Below Average Speed</h6>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">VADER</h6>
-                        <a href="">Expand</a>
+                <div class="bg-secondary text-center rounded p-4 d-flex align-items-center">
+                    <div class="w-50">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">TextBlob</h6>
+                            <a href="views/textblob.php">Expand</a>
+                        </div>
+                        <div class="w-100">
+                            <h6 class="mb-3">Advantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>TextBlob comes with pre-built models for various NLP tasks</p>
+                            <p>Provides a range of NLP functionalities such as sentiment analysis, part-of-speech tagging, and noun phrase extraction</p>
+                            <p>TextBlob allows users to easily train their own models for specific tasks and domains</p>
+                            </p>
+                            <h6 class="mt-4 mb-3">Disadvantages:</h6>
+                            <p class="text-left pl-3">
+                            <p>Lower accuracy and performance compared to more advanced NLP models</p>
+                            <p>May require additional customization and training for specific tasks and domains</li>
+                            <p>May have difficulty with complex language structure and nuances</p>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">VADER</h6>
-                        <a href="">Expand</a>
+                    <div class="w-50">
+                        <div class="d-flex justify-content-center">
+                            <i class="bi bi-speedometer2" style="font-size: 7rem; color: #00a000;"></i>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h6>Good Speed</h6>
+                        </div>
                     </div>
                 </div>
             </div>
