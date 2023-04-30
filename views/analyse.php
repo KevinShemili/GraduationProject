@@ -178,6 +178,7 @@ if (isset($_SESSION["user_id"])) {
                                 <tr class="text-white text-center">
                                     <th scope="col">Query</th>
                                     <th scope="col">Number of Tweets</th>
+                                    <th scope="col">Algorithm</th>
                                     <th scope="col">Date Created</th>
                                     <th scope="col">Action</th>
 

@@ -1,7 +1,6 @@
 let tableBody = document.getElementById("table-body");
 
 let detailsButton = document.getElementById("details-button");
-let deleteButton = document.getElementById("delete-button");
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -44,10 +43,15 @@ let prepareContent = (analyses) => {
         <tr class="text-center">
             <td>${analyse.query}</td>
             <td>${analyse.nrTweets}</td>
+            <td>${analyse.algorithm.toUpperCase()}</td>
             <td>${analyse.dateCreated}</td>
             <td>
-                <a class="btn btn-sm btn-info" id="details-button" href="chart.php?analyseId=${analyse.id}" self-id="${analyse.id}">Details</a>
-                <a class="btn btn-sm btn-primary" id="delete-button" href="" self-id="${analyse.id}">Delete</a>
+                <a class="btn btn-sm btn-info" id="details-button" href="chart.php?analyseId=${
+                  analyse.id
+                }" self-id="${analyse.id}">Details</a>
+                <a class="btn btn-sm btn-primary" id="delete-button" href="../scripts/deleteAnalysis.php?analyseId=${
+                  analyse.id
+                }" self-id="${analyse.id}">Delete</a>
             </td>
         </tr>
         `;

@@ -27,9 +27,11 @@ window.onload = () => {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       let response = JSON.parse(xhr.responseText);
       if (response.status == 200) {
-        positive = response.positive;
-        negative = response.negative;
+        strongPositive = response.strongPositive;
+        strongNegative = response.strongNegative;
         neutral = response.neutral;
+        weakPositive = response.weakPositive;
+        weakNegative = response.weakNegative;
         query.innerText = "Query: " + response.query;
         nr.innerText = "Number of Tweets: " + response.nr;
         algo.innerText = "Algorithm used: " + response.algorithm.toUpperCase();
@@ -39,15 +41,29 @@ window.onload = () => {
         var myChart4 = new Chart(ctx4, {
           type: "bar",
           data: {
-            labels: ["Negative", "Neutral", "Positive"],
+            labels: [
+              "Strong Negative",
+              "Weak Negative",
+              "Neutral",
+              "Weak Positive",
+              "Strong Positive",
+            ],
             datasets: [
               {
                 backgroundColor: [
-                  "rgba(235, 22, 22, .7)", // Negative - Red
-                  "rgba(255, 165, 0, .7)", // Neutral - Orange
-                  "rgba(76, 175, 80, .7)", // Positive - Green
+                  "rgba(153, 0, 0, .7)", // Strong Negative - Dark Red
+                  "rgba(255, 102, 102, .7)", // Weak Negative - Light Red
+                  "rgba(128, 128, 128, .7)", // Neutral - Gray
+                  "rgba(102, 255, 102, .7)", // Weak Positive - Light Green
+                  "rgba(0, 153, 0, .7)", // Strong Positive - Dark Green
                 ],
-                data: [negative, neutral, positive],
+                data: [
+                  strongNegative,
+                  weakNegative,
+                  neutral,
+                  weakPositive,
+                  strongPositive,
+                ],
               },
             ],
           },
@@ -58,19 +74,6 @@ window.onload = () => {
                 beginAtZero: true,
               },
             },
-            plugins: {
-              tooltip: {
-                callbacks: {
-                  title: function (tooltipItems) {
-                    const index = tooltipItems[0].dataIndex;
-                    const label = tooltipItems[0].label;
-                    const color =
-                      index === 0 ? "Red" : index === 1 ? "Orange" : "Green";
-                    return `Color ${color}: ${label}`;
-                  },
-                },
-              },
-            },
           },
         });
 
@@ -79,15 +82,29 @@ window.onload = () => {
         var myChart5 = new Chart(ctx5, {
           type: "pie",
           data: {
-            labels: ["Negative", "Neutral", "Positive"],
+            labels: [
+              "Strong Negative",
+              "Weak Negative",
+              "Neutral",
+              "Weak Positive",
+              "Strong Positive",
+            ],
             datasets: [
               {
                 backgroundColor: [
-                  "rgba(235, 22, 22, .7)", // Negative - Red
-                  "rgba(255, 165, 0, .7)", // Neutral - Orange
-                  "rgba(76, 175, 80, .7)", // Positive - Green
+                  "rgba(153, 0, 0, .7)", // Strong Negative - Dark Red
+                  "rgba(255, 102, 102, .7)", // Weak Negative - Light Red
+                  "rgba(128, 128, 128, .7)", // Neutral - Gray
+                  "rgba(102, 255, 102, .7)", // Weak Positive - Light Green
+                  "rgba(0, 153, 0, .7)", // Strong Positive - Dark Green
                 ],
-                data: [negative, neutral, positive],
+                data: [
+                  strongNegative,
+                  weakNegative,
+                  neutral,
+                  weakPositive,
+                  strongPositive,
+                ],
               },
             ],
           },
@@ -101,15 +118,29 @@ window.onload = () => {
         var myChart6 = new Chart(ctx6, {
           type: "doughnut",
           data: {
-            labels: ["Negative", "Neutral", "Positive"],
+            labels: [
+              "Strong Negative",
+              "Weak Negative",
+              "Neutral",
+              "Weak Positive",
+              "Strong Positive",
+            ],
             datasets: [
               {
                 backgroundColor: [
-                  "rgba(235, 22, 22, .7)", // Negative - Red
-                  "rgba(255, 165, 0, .7)", // Neutral - Orange
-                  "rgba(76, 175, 80, .7)", // Positive - Green
+                  "rgba(153, 0, 0, .7)", // Strong Negative - Dark Red
+                  "rgba(255, 102, 102, .7)", // Weak Negative - Light Red
+                  "rgba(128, 128, 128, .7)", // Neutral - Gray
+                  "rgba(102, 255, 102, .7)", // Weak Positive - Light Green
+                  "rgba(0, 153, 0, .7)", // Strong Positive - Dark Green
                 ],
-                data: [negative, neutral, positive],
+                data: [
+                  strongNegative,
+                  weakNegative,
+                  neutral,
+                  weakPositive,
+                  strongPositive,
+                ],
               },
             ],
           },

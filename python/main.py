@@ -1,16 +1,16 @@
-import tweepy
-import re
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import json
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from difflib import SequenceMatcher
-from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
-import sys
-
 try:
+    import tweepy
+    import re
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import json
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    from difflib import SequenceMatcher
+    from fuzzywuzzy import fuzz
+    from fuzzywuzzy import process
+    import sys
+
     consumer_key = sys.argv[3]
     consumer_secret = sys.argv[4]
     access_token = sys.argv[5]
@@ -57,21 +57,30 @@ try:
                 break
 
     analyzer = SentimentIntensityAnalyzer()
-    pos = 0
-    neg = 0
+    strong_pos = 0
+    weak_pos = 0
+    strong_neg = 0
+    weak_neg = 0
     neu = 0
     for tweet in searched_tweets:
         analysis = analyzer.polarity_scores(tweet.full_text)
-        if analysis['compound'] > 0:
-            pos += 1
-        elif analysis['compound'] < 0:
-            neg += 1  
+        compound = analysis['compound']
+        if 0.05 <= compound < 0.5:
+            weak_pos += 1
+        elif compound >= 0.5:
+            strong_pos += 1
+        elif -0.5 < compound <= -0.05:
+            weak_neg += 1
+        elif compound <= -0.5:
+            strong_neg += 1
         else:
             neu += 1
 
     result = {
-        "total_positive": pos,
-        "total_negative": neg,
+        "total_sPositive": strong_pos,
+        "total_wPositive": weak_pos,
+        "total_sNegative": strong_neg,
+        "total_wNegative": weak_neg,
         "total_neutral": neu
     }
 
