@@ -93,6 +93,25 @@ if (isset($_SESSION["user_id"])) {
         </div>
         <!-- Modal2 End -->
 
+        <!-- Modal3 Start -->
+        <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Analysing...</h5>
+                    </div>
+                    <div class="modal-body">
+                        This may take a while...
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border mx-auto" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal3 End -->
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -129,9 +148,9 @@ if (isset($_SESSION["user_id"])) {
                         </a>
 
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">VADER</a>
-                            <a href="typography.html" class="dropdown-item">TEXT BLOB</a>
-                            <a href="element.html" class="dropdown-item">ALGO 3</a>
+                            <a href="vader.php" class="dropdown-item">VADER</a>
+                            <a href="textblob.php" class="dropdown-item">TextBlob</a>
+                            <a href="bert.php" class="dropdown-item">Bert</a>
                         </div>
 
                     </div>
@@ -219,7 +238,7 @@ if (isset($_SESSION["user_id"])) {
                                         <option selected value="noValue">Algorithm Selection</option>
                                         <option value="vader">VADER</option>
                                         <option value="textblob">TextBlob</option>
-                                        <option value="3">Op3</option>
+                                        <option value="bert">Bert</option>
                                     </select>
                                 </form>
                             </div>

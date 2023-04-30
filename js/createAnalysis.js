@@ -14,6 +14,7 @@ let modalYes = document.getElementById("modalYes");
 let modalCancel = document.getElementById("modalCancel");
 
 let modal2 = document.getElementById("exampleModalCenter2");
+let modal3 = document.getElementById("exampleModalCenter3");
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -77,6 +78,7 @@ btn.addEventListener("click", () => {
         $(modal).modal("show");
         return;
       } else {
+        $(modal3).modal("show");
         consumerKey = responseKeys.consumer_key;
         consumerSecret = responseKeys.consumer_secret;
         accessToken = responseKeys.access_token;
@@ -107,9 +109,11 @@ btn.addEventListener("click", () => {
             http2.status === 200
           ) {
             let response = JSON.parse(http2.responseText);
-            if (response == 200) {
-              window.location.href = "../views/chart.php";
+            if (response.status == 200) {
+              $(modal3).modal("hide");
+              window.location.href = `../views/chart.php?analyseId=${response.analyseId}`;
             } else if (response.status == 500) {
+              $(modal3).modal("hide");
               $(modal2).modal("show");
             } else {
               error.innerText = response;

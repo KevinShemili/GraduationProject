@@ -6,6 +6,7 @@ Chart.defaults.borderColor = "#000000";
 let query = document.getElementById("query");
 let desc = document.getElementById("desc");
 let nr = document.getElementById("nr");
+let algo = document.getElementById("algo");
 
 let positive, negative, neutral;
 
@@ -29,6 +30,10 @@ window.onload = () => {
         positive = response.positive;
         negative = response.negative;
         neutral = response.neutral;
+        query.innerText = "Query: " + response.query;
+        nr.innerText = "Number of Tweets: " + response.nr;
+        algo.innerText = "Algorithm used: " + response.algorithm.toUpperCase();
+        desc.innerText = "About: " + response.description;
 
         var ctx4 = $("#bar-chart").get(0).getContext("2d");
         var myChart4 = new Chart(ctx4, {

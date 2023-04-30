@@ -94,9 +94,9 @@ if (isset($_SESSION["user_id"])) {
                         </a>
 
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">VADER</a>
-                            <a href="typography.html" class="dropdown-item">TEXT BLOB</a>
-                            <a href="element.html" class="dropdown-item">ALGO 3</a>
+                            <a href="vader.php" class="dropdown-item">VADER</a>
+                            <a href="textblob.php" class="dropdown-item">TextBlob</a>
+                            <a href="bert.php" class="dropdown-item">Bert</a>
                         </div>
 
                     </div>

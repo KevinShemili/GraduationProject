@@ -95,7 +95,12 @@ if ($algorithm == "vader") {
             echo getJson($error);
             die();
         }
-        echo getJson("200");
+        $inserted_id = mysqli_insert_id($connection);
+        $returnObj = array(
+            "status" => 200,
+            "analyseId" => $inserted_id
+        );
+        echo getJson($returnObj);
     }
 } elseif ($algorithm == "textblob") {
 } else {

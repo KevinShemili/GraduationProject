@@ -62,7 +62,7 @@ function getSentiment($analyseId)
 {
     global $connection;
 
-    $sql_query = " SELECT `negative`, `neutral`, `positive` FROM `analysis` WHERE id = '$analyseId' ";
+    $sql_query = " SELECT `query`, `nrTweets`, `description`, `algorithm`, `negative`, `neutral`, `positive` FROM `analysis` WHERE id = '$analyseId' ";
     $query_result = mysqli_query($connection, $sql_query);
 
     if ($query_result == false) {
@@ -77,6 +77,10 @@ function getSentiment($analyseId)
 
         $returnObj = array(
             "status" => 200,
+            "query" => $row["query"],
+            "nr" => $row["nrTweets"],
+            "description" => $row["description"],
+            "algorithm" => $row["algorithm"],
             "positive" => $row["positive"],
             "neutral" => $row["neutral"],
             "negative" => $row["negative"]
