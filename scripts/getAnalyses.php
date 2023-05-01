@@ -62,7 +62,7 @@ function getSentiment($analyseId)
 {
     global $connection;
 
-    $sql_query = " SELECT `query`, `nrTweets`, `description`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative` FROM `analysis` WHERE id = '$analyseId' ";
+    $sql_query = " SELECT `query`, `nrTweets`, `description`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `fileName` FROM `analysis` WHERE id = '$analyseId' ";
     $query_result = mysqli_query($connection, $sql_query);
 
     if ($query_result == false) {
@@ -85,7 +85,8 @@ function getSentiment($analyseId)
             "neutral" => $row["neutral"],
             "strongNegative" => $row["negative"],
             "weakPositive" => $row["weakPositive"],
-            "weakNegative" => $row["weakNegative"]
+            "weakNegative" => $row["weakNegative"],
+            "csvFile" => $row["fileName"]
         );
 
         echo getJson($returnObj);

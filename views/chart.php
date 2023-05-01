@@ -39,6 +39,8 @@ if (isset($_SESSION["user_id"])) {
 
     <script src="../js/chart.js" defer></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body>
@@ -204,6 +206,31 @@ if (isset($_SESSION["user_id"])) {
                 </div>
             </div>
             <!-- Chart End -->
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Analysed Tweets</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white text-center">
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Text</th>
+                                    <th scope="col">Retweets</th>
+                                    <th scope="col">Date Created</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
 
 
             <!-- Footer Start -->

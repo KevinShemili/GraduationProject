@@ -8,7 +8,39 @@ let desc = document.getElementById("desc");
 let nr = document.getElementById("nr");
 let algo = document.getElementById("algo");
 
+let table = document.getElementById("table-body");
+
 let positive, negative, neutral;
+
+function loadCSV(file, callback) {
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      callback(xhr.responseText);
+    }
+  };
+  xhr.open("GET", file, true);
+  xhr.send(null);
+}
+
+// Populate the table
+function populateTable(csvData) {
+  let parsedData = Papa.parse(csvData, {
+    header: true,
+    skipEmptyLines: true,
+  });
+
+  for (let row of parsedData.data) {
+    table.innerHTML += `
+        <tr class="text-center">
+            <td>${row.tweet_id}</td>
+            <td>${row.text}</td>
+            <td>${row.retweet_count}</td>
+            <td>${row.created_at}</td>
+        </tr>
+        `;
+  }
+}
 
 window.onload = () => {
   const analyseId = urlParams.get("analyseId");
@@ -36,6 +68,7 @@ window.onload = () => {
         nr.innerText = "Number of Tweets: " + response.nr;
         algo.innerText = "Algorithm used: " + response.algorithm.toUpperCase();
         desc.innerText = "About: " + response.description;
+        csvFile = "../csv/" + response.csvFile;
 
         var ctx4 = $("#bar-chart").get(0).getContext("2d");
         var myChart4 = new Chart(ctx4, {
@@ -148,6 +181,12 @@ window.onload = () => {
             responsive: true,
           },
         });
+
+        if (csvFile != "../csv/") {
+          loadCSV(csvFile, function (csvData) {
+            populateTable(csvData);
+          });
+        }
       } else {
         error.innerText = response.error;
       }

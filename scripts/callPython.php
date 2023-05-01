@@ -88,8 +88,10 @@ if ($algorithm == "vader") {
         $strongNegative = $data["total_sNegative"];
         $weakPositive = $data["total_wPositive"];
         $weakNegative = $data["total_wNegative"];
+        $fileName = $data["file"];
         $date = date('Y-m-d');
-        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$id') ";
+
+        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `fileName`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$fileName','$id') ";
         $mysqliResult = mysqli_query($connection, $sql_insert_query);
 
         if ($mysqliResult == false) {
@@ -122,8 +124,10 @@ if ($algorithm == "vader") {
         $strongNegative = $data["total_sNegative"];
         $weakPositive = $data["total_wPositive"];
         $weakNegative = $data["total_wNegative"];
+        $fileName = $data["file"];
         $date = date('Y-m-d');
-        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$id') ";
+
+        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `fileName`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$fileName','$id') ";
         $mysqliResult = mysqli_query($connection, $sql_insert_query);
 
         if ($mysqliResult == false) {
@@ -156,8 +160,10 @@ if ($algorithm == "vader") {
         $strongNegative = $data["total_sNegative"];
         $weakPositive = $data["total_wPositive"];
         $weakNegative = $data["total_wNegative"];
+        $fileName = $data["file"];
         $date = date('Y-m-d');
-        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$id') ";
+
+        $sql_insert_query = " INSERT INTO `analysis`(`query`, `nrTweets`, `description`, `dateCreated`, `algorithm`, `negative`, `neutral`, `positive`, `weakPositive`, `weakNegative`, `fileName`, `user_id`) VALUES ('$query','$tweetNr','$description','$date','$algorithm','$strongNegative','$neutral','$strongPositive','$weakPositive','$weakNegative','$fileName','$id') ";
         $mysqliResult = mysqli_query($connection, $sql_insert_query);
 
         if ($mysqliResult == false) {

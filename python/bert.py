@@ -2,15 +2,13 @@ try:
     import tweepy
     import re
     import pandas as pd
-    import numpy as np
-    import matplotlib.pyplot as plt
     import json
-    from difflib import SequenceMatcher
     from fuzzywuzzy import fuzz
-    from fuzzywuzzy import process
     from transformers import AutoTokenizer, AutoModelForSequenceClassification
     import torch
     import sys
+    import uuid
+
 
     # Set up BERT sentiment analysis pipeline
     tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
@@ -89,12 +87,43 @@ try:
             else:
                 neu += 1
 
+    # Remove @ handle
+    def remove_pattern(input_txt, pattern):
+        r = re.findall(pattern, input_txt)
+        for i in r:
+            input_txt = re.sub(i, '', input_txt)
+        return input_txt
+
+    my_list_of_dicts = []
+    for each_json_tweet in searched_tweets:
+        tweet_id = each_json_tweet.id
+        text = remove_pattern(each_json_tweet.full_text, "@[\w]*")
+        retweet_count = each_json_tweet.retweet_count
+        created_at = each_json_tweet.created_at
+        
+        my_list_of_dicts.append({
+            'tweet_id': str(tweet_id),
+            'text': str(text),
+            'retweet_count': int(retweet_count),
+            'created_at': created_at,
+        })
+
+    # Create a DataFrame directly from the list of dictionaries
+    tweet_dataset = pd.DataFrame(my_list_of_dicts)
+
+    # Generate a unique file name using UUID
+    fileName = f'{uuid.uuid4()}.csv'
+
+    # Save the DataFrame to a CSV file
+    tweet_dataset.to_csv(f'../csv/{fileName}', index=False)
+
     result = {
         "total_sPositive": strong_pos,
         "total_wPositive": weak_pos,
         "total_sNegative": strong_neg,
         "total_wNegative": weak_neg,
-        "total_neutral": neu
+        "total_neutral": neu,
+        "file": fileName
     }
 
     print(json.dumps(result))
